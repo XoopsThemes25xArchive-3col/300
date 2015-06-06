@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<{$xoops_langcode}>" lang="<{$xoops_langcode}>">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=<{$xoops_charset}>" />
+<meta http-equiv="content-language" content="<{$xoops_langcode}>" />
+<meta name="robots" content="<{$xoops_meta_robots}>" />
+<meta name="keywords" content="<{$xoops_meta_keywords}>" />
+<meta name="description" content="<{$xoops_meta_description}>" />
+<meta name="rating" content="<{$xoops_meta_rating}>" />
+<meta name="author" content="<{$xoops_meta_author}>" />
+<meta name="copyright" content="<{$xoops_meta_copyright}>" />
+<meta name="generator" content="XOOPS" />
+<title><{$xoops_sitename}> - <{$xoops_pagetitle}></title>
+<link href="<{$xoops_url}>/favicon.ico" rel="SHORTCUT ICON" />
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_url}>/xoops.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_themecss}>" />
+<link rel="stylesheet" type="text/css" media="screen" href="<{$xoops_imageurl}><{$xoops_langcode}>.css" />
+<!-- RMV: added module header -->
+<{$xoops_module_header}>
+<script type="text/javascript">
+<!--
+<{$xoops_js}>
+//-->
+</script>
+<script type="text/javascript">
+function toggle(notifs_form) 
+{
+obj=document.getElementById(notifs_form);
+obj.style.display=!(obj.style.display=="block")? "block" : "none";  
+}
+
+function swapimage(swap)
+{
+img_plus="<{$xoops_imageurl}>images/plus.gif";
+img_minus="<{$xoops_imageurl}>images/minus.gif";
+obj=document.getElementById(swap);
+obj.src=!(obj.src==img_minus)? img_minus : img_plus;  
+}
+</script>
+</head>
+<body>
+<form action="<{$xoops_url}>/user.php" method="post">
+<table align="center" cellpadding="0" cellspacing="0" class="head_top">
+      <tr>
+    <td height="15">
+      
+      <span class="small"><{if $xoops_isuser}></span> <span class="left" align="bottom"><img src="<{$xoops_imageurl}>images/divider.gif" alt=""  border="0" /></span><span class="left" align="bottom"> <a href="<{$xoops_url}>/user.php"><{$smarty.const.View Account}></a><img src="<{$xoops_imageurl}>images/divider.gif" alt=""  border="0" /><a href="<{$xoops_url}>/notifications.php"><{$smarty.const.Notifications}></a><img src="<{$xoops_imageurl}>images/divider.gif" alt=""  border="0" /><{php}>
+GLOBAL $xoopsUser;
+$pm_handler =& xoops_gethandler('privmessage');
+$uid = $xoopsUser->getVar('uid');
+$criteria = new CriteriaCompo(new Criteria('read_msg', 0));
+$criteria->add(new Criteria('to_userid', $uid));
+$msgcount = $pm_handler->getCount($criteria);
+$GLOBALS['xoopsTpl']->assign('msgcount', $msgcount);
+<{/php}>
+
+<{if $msgcount > 0}> 
+<a class="highlight" href="<{$xoops_url}>/viewpmsg.php"><{$smarty.const.INBOX}> (<span style="color:#ff0000; font-weight: bold;"><{$msgcount}></span>)</a>
+<{else}> 
+<a href="<{$xoops_url}>/viewpmsg.php"><{$smarty.const.INBOX}></a>
+<{/if}><img src="<{$xoops_imageurl}>images/divider.gif" alt=""  border="0" /><a href="<{$xoops_url}>/user.php?op=logout"> <{$smarty.const.logout}> </a><img src="<{$xoops_imageurl}>images/divider.gif" alt=""  border="0" /><{if
+      $xoops_isadmin}> <a href="<{$xoops_url}>/admin.php"><{$smarty.const.administrtion menu}></a> <a href="<{$xoops_url}>/notifications.php"> </a><img src="<{$xoops_imageurl}>images/divider.gif" alt=""  border="0" /><{/if}><{else}><a href="<{$xoops_url}>/user.php#lost"><{$smarty.const.lost password?}></a> <img src="<{$xoops_imageurl}>images/spacer.gif" alt=""  border="0" /><a href="<{$xoops_url}>/register.php"> <{$smarty.const.REGISTER NOW !}>
+</a><img src="<{$xoops_imageurl}>images/spacer.gif" alt=""  border="0" /> </span>
+      <{$smarty.const.user name}>
+        <input type="text" name="uname" size="12" value="<{$block.unamevalue}>" />
+         <{$smarty.const.password}>     
+          <input type="password" name="pass" size="12" />
+         <input type="hidden" name="xoops_redirect" value="<{$xoops_requesturi}>" />
+         <input type="hidden" name="op" value="login" />
+      <input name="submit" type="submit" value="<{$smarty.const.LOGIN}>" /><input type="checkbox" name="rememberme" value="On" class ="formButton" />
+      <{$smarty.const.rememberme}><{$block.lang_rememberme}><{/if}><span class="left"><img src="<{$xoops_imageurl}>images/spacer.gif" alt=""  border="0" /></span>    </td>
+  </tr>
+  </form>  
+<table align="center" cellpadding="0" cellspacing="0" class="head_table">
+  <tr> 
+    <td><a href="<{$xoops_url}>/">
+    </a><img src="<{$xoops_imageurl}>images/logo.gif" alt="" border="0" /></td>
+  </tr>
+</table>
+  <form style="margin-top: 0px;" action="<{$xoops_url}>/search.php" method="post">
+<table align="center" cellpadding="0" cellspacing="0" class="head_buttons">
+<tr>
+    <td width="550" height="20" class="buttons_menu"><span class="right"> </span>
+      <table border="0" cellpadding="0" cellspacing="0" class="balk2">
+        <tr>
+          <td id="buttons_boven"><a href="<{$xoops_url}>"><{$smarty.const.HOME}></a></td>
+          <td id="buttons_boven1"><a href="<{$xoops_url}>/modules/newbb/"><{$smarty.const.FROUM}></a></td>
+          <td id="buttons_boven2"><a href="<{$xoops_url}>/modules/wfdownloads/"><{$smarty.const.DOWNLOAD}></a></td>
+          <td id="buttons_boven3"><a href="<{$xoops_url}>/modules/contact/"><{$smarty.const.CONTACT US}></a></td>
+          <td id="buttons_boven4"><a href="<{$xoops_url}>/modules/wfchannel"><{$smarty.const.ABOUT US}></a></td>
+          <td id="buttons_boven5"><a href="<{$xoops_url}>/modules/xcgal"><{$smarty.const.GALERRY}></a></td>
+          <td id="buttons_boven6"><a href="<{$xoops_url}>/modules/xfsection"><{$smarty.const.ARTICLE}></a></td>
+        </tr>
+      </table></td>
+    <td align="right" valign="top" class="buttons_menu"><div align="right">
+    <input type="text" name="query" size="14" />
+        <input type="hidden" name="action" value="results" />
+        <input name="submit2" type="image" value="<{$smarty.const.SEARCH}>" src="<{$xoops_imageurl}>/images/zoeken.gif" alt="<{$smarty.const.search}>" align="top" />
+        <br />
+      </div></td>
+    <td align="right" class="buttons_menu">&nbsp;</td>
+  </tr>
+</form>
+ 	<table class="maintable" cellspacing="0">
+    <tr>
+      <td id="leftcolumn"> <br/>
+	<!-- Start left blocks loop -->
+        <{foreach item=block from=$xoops_lblocks}>
+          <{include file="300/theme_blockleft.html"}>
+        <{/foreach}>
+ <!-- End left blocks loop -->
+
+      </td>
+
+      <td id="centercolumn"><{$xoops_banner}>
+        <!-- Display center blocks if any -->
+        <{if $xoops_showcblock == 1}>
+        <table cellspacing="0">
+		<tr>
+			<td id="centerCcolumn" colspan="2">
+			<!-- Start center-center blocks loop -->
+			<{foreach item=block from=$xoops_ccblocks}>
+				<{include file="300/theme_blockcenter_c.html"}>
+			<{/foreach}>
+			<!-- End center-center blocks loop -->
+			</td>
+		</tr>
+		<tr>
+			<td id="centerLcolumn">		
+			<!-- Start center-left blocks loop -->
+			<{foreach item=block from=$xoops_clblocks}>
+				<{include file="300/theme_blockcenter_l.html"}>
+			<{/foreach}>
+			<!-- End center-left blocks loop -->
+			</td>
+			<td id="centerRcolumn">		
+			<!-- Start center-right blocks loop -->
+			<{foreach item=block from=$xoops_crblocks}>
+				<{include file="300/theme_blockcenter_r.html"}>
+			<{/foreach}>
+			<!-- End center-right blocks loop -->
+			</td>
+		</tr>
+        </table>
+        <{/if}>
+        <!-- End display center blocks -->
+				
+      <table  border="0" width="100%" cellspacing="0" cellpadding="0">
+        <tr> 
+          <td width="74" height="74"> <img border="0" src="<{$xoops_imageurl}>images/content-topright.<{$xoops_langcode}>.jpg" alt=""></td>
+          <td width="50%" background="<{$xoops_imageurl}>images/content-title.jpg"></td>
+          <td width="50" height="74" background="<{$xoops_imageurl}>images/content-title.jpg"><img border="0" src="<{$xoops_imageurl}>images/content-center-down.jpg" alt="" /></td>
+          <td width="50%" background="<{$xoops_imageurl}>images/content-title.jpg"></td>
+          <td width="74" height="74"> <img border="0" src="<{$xoops_imageurl}>images/content-topleft.<{$xoops_langcode}>.jpg" alt=""></td>
+        </tr>
+        <tr> 
+          <td width="74" background="<{$xoops_imageurl}>images/content-right.<{$xoops_langcode}>.jpg" alt="" ></td>
+          <td colspan="3" id="content"><{$xoops_contents}></td>
+          <td width="74" background="<{$xoops_imageurl}>images/content-left.<{$xoops_langcode}>.jpg" alt=""></td>
+        </tr>
+        <tr> 
+          <td width="74" height="74"> <img border="0" src="<{$xoops_imageurl}>images/content-bottomright.<{$xoops_langcode}>.jpg" alt="" ></td>
+          <td background="<{$xoops_imageurl}>images/content-bottom.jpg"></td>
+          <td background="<{$xoops_imageurl}>images/content-bottom.jpg"><img border="0" src="<{$xoops_imageurl}>images/content-center.jpg" alt="" /></td>
+          <td background="<{$xoops_imageurl}>images/content-bottom.jpg"></td>
+          <td width="74" height="74"> <img border="0" src="<{$xoops_imageurl}>images/content-bottomleft.<{$xoops_langcode}>.jpg" alt=""></td>
+        </tr>
+      </table>
+        <{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright or $xoBlocks.page_bottomcenter}>
+        <table cellspacing="0">
+        <{if $xoBlocks.page_bottomcenter}>
+		<tr><td id="bottomCcolumn" colspan="2">
+			<{foreach from=$xoBlocks.page_bottomcenter item=block}><{include file="300/theme_blockcenter_c.html"}><{/foreach}>
+			</td>
+		</tr>
+		<{/if}>
+		<{if $xoBlocks.page_bottomleft or $xoBlocks.page_bottomright}>
+		<tr>
+			<td id="bottomLcolumn">
+				<{foreach from=$xoBlocks.page_bottomleft item=block}><{include file="300/theme_blockcenter_l.html"}><{/foreach}>
+			</td>
+			<td id="bottomRcolumn">
+				<{foreach from=$xoBlocks.page_bottomright item=block}><{include file="300/theme_blockcenter_r.html"}><{/foreach}>
+			</td>
+		</tr>
+        <{/if}>
+        </table>
+<{/if}>
+</td>
+ <{if $xoops_showrblock == 1}>
+      <td id="rightcolumn"><br/>
+        <!-- Start right blocks loop -->
+        <{foreach item=block from=$xoops_rblocks}>
+          <{include file="300/theme_blockright.html"}>
+        <{/foreach}>
+<!-- End right blocks loop -->
+    </td>
+      <{/if}>
+</tr>
+</table>
+
+  <table cellspacing="0">
+    <tr id="footerbar">
+      <td> <{$xoops_footer}> </td>
+    </tr>
+  </table>
+</body>
+</html>
+<tr>
+
+				<td id="footerbar" colspan="3">
+
+				<p align="center"><{$xoops_footer}><br>
+
+&nbsp;Themed by <a href="http://www.margkhar.com/">margkhar.com</a></p>
+
+				</td>
+
+			</tr>
